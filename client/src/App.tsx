@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import Layout from './Layout';
 import HomePage from './HomePage';
 import RegistrationPage from './RegistrationPage';
+import PostClimbPage from './PostClimbPage';
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         element: <RegistrationPage/>,
         path: '/register'
+      },
+      {
+        element: <PostClimbPage/>,
+        path: '/climb/new'
       }
     ]
     },
