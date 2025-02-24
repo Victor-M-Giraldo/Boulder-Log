@@ -8,7 +8,7 @@ export function useRegister() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
 
-  async function register(formData: Record<string, string>) {
+  async function register(formData: Record<string, string>): Promise<boolean> {
     setLoading(true);
     setErrors({});
     const userService = new UserService();
@@ -25,8 +25,10 @@ export function useRegister() {
 
       setUser(user);
       setItem('token', { token, expiresIn });
+      return true;
     } catch (e) {
       setErrors(e as Record<string, string>);
+      return false;
     } finally {
         setLoading(false);
     }

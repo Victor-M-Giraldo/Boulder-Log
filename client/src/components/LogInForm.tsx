@@ -11,12 +11,12 @@ export default function LogInForm() {
   const { login, errors, loading } = useLogin();
   const navigate = useNavigate();
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = serializeFormData(formData);
-    login(data);
-    if (Object.keys(errors).length === 0) {
+    const loginSuccess = await login(data);
+    if (loginSuccess) {
       navigate('/');
     }
   }
