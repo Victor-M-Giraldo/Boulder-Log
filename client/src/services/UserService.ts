@@ -16,4 +16,18 @@ export default class UserService {
 
     return await response.json();
   }
+
+  async register(firstName: string, lastName: string, email: string, password: string, confirmPassword: string): Promise<LoginResponse> {
+    const response = await ApiClient(
+      '/register',
+      { method: 'POST' },
+      { firstName, lastName, email, password, confirmPassword }
+    )
+
+    if (!response.ok) {
+      throw await handleErrors(response);
+    }
+
+    return await response.json();
+  }
 }
