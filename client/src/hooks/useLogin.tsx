@@ -9,7 +9,7 @@ export function useLogin() {
   const [loading, setLoading] = useState(false);
   const userService = new UserService();
 
-  async function login(formData: Record<string, string>): Promise<void> {
+  async function login(formData: Record<string, string>): Promise<boolean> {
     setLoading(true);
     setErrors({});
     const { email, password } = formData;
@@ -21,8 +21,10 @@ export function useLogin() {
       );
       setUser(user);
       setItem('token', { token, expiresIn });
+      return true;
     } catch (error) {
       setErrors(error as Record<string, string>);
+      return false;
     } finally {
       setLoading(false);
     }
