@@ -31,20 +31,20 @@ const registerUser = asyncHandler(async (req, res) => {
     },
   });
 
-  const { password: _, ...userResponse } = newUser;
-
+  const userResponse = {
+    firstName: newUser.firstName,
+    lastName: newUser.lastName,
+    email: newUser.email,
+  };
   const { token, expiresIn } = issueJWT(newUser);
 
   res
     .status(201)
     .header('Location', `/users/${newUser.id}`)
     .json({
-      message: 'User created successfully',
-      data: {
-        token: `bearer ${token}`,
-        expiresIn: expiresIn,
-        user: userResponse,
-      },
+      token: `bearer ${token}`,
+      expiresIn: expiresIn,
+      user: userResponse,
     });
 });
 

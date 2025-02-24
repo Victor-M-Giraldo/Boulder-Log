@@ -18,6 +18,8 @@ export async function handleErrors(response: Response) {
         }
         case 401:
             return { general: 'Invalid email or password' };
+        case 409:
+            return { general: 'Email already in use' };
         default:
             return { general: 'Something went wrong' };
     }
