@@ -5,3 +5,10 @@ export interface LoginResponse {
     expiresIn: string;
     user: User;
 }
+
+
+export interface RegisterResponse {
+    token: string;
+    expiresIn: string;
+    user: User;
+}
