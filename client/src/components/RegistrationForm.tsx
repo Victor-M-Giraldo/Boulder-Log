@@ -4,15 +4,20 @@ import Button from './Button';
 import AuthFooter from './AuthFooter';
 import { serializeFormData } from '../utils/formUtils';
 import { useRegister } from '../hooks/useRegister';
+import { useNavigate } from 'react-router';
 
 export default function RegistrationForm() {
   const { register, errors, loading } = useRegister();
+  const navigate = useNavigate();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = serializeFormData(formData);
-    register(data);
+    const registrationSuccess = await register(data);
+    if (registrationSuccess) {
+      navigate('/')
+    }
   }
   return (
     <>
