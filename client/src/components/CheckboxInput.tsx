@@ -1,23 +1,24 @@
 import { ElementType } from "react";
 
-interface FileInputProps {
+interface CheckboxInputProps {
+    children: React.ReactNode;
     label: string;
     Wrapper?: ElementType;
-    accept: string;
+    value: string;
     required?: boolean;
     error?: string | null;
 }
 
-export default function FileInput({label, Wrapper, accept, required, error}: FileInputProps) {
+export default function CheckboxInput({label, Wrapper, required, value, error}: CheckboxInputProps) {
   const Content = (
-    <label htmlFor={label}>
-      {label}
+    <label className='fieldset-label mt-2'>
       <input
-        type='file'
-        className='file-input w-full mt-1'
-        accept={accept}
+        type='checkbox'
+        className='checkbox checkbox-primary mt-1'
         required={required}
+        value={value}
       />
+      {label}
       <p className='text-sm text-red-400 mt-1'>{error}</p>
     </label>
   );
