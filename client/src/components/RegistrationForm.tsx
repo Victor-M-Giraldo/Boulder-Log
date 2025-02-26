@@ -70,7 +70,7 @@ export default function RegistrationForm() {
               required={true}
               Wrapper='div'
             />
-            <Button type='submit' disabled={loading} Wrapper='div'>
+            <Button type='submit' disabled={loading} Wrapper='div' width='full'>
               {loading ? 'Signing Up...' : 'Sign Up'}
             </Button>
             <AuthFooter promptText="Already have an account? " link='/login' linkText='Log in here'/>

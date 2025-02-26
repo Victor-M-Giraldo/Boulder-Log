@@ -53,7 +53,7 @@ export default function LogInForm() {
         />
 
         <GeneralError error={errors.general} />
-        <Button type='submit' disabled={loading} Wrapper='div'>
+        <Button type='submit' disabled={loading} Wrapper='div' width='full'>
           {loading ? 'Logging in...' : 'Log In'}
         </Button>
       </Form>
