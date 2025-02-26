@@ -1,4 +1,4 @@
-import { ElementType } from "react";
+import { ElementType } from 'react';
 
 interface InputFieldProps {
   type: 'email' | 'password' | 'text';
@@ -9,7 +9,7 @@ interface InputFieldProps {
   minLength?: number;
   maxLength?: number;
   error: string | null;
-  Wrapper?: ElementType
+  Wrapper?: ElementType;
 }
 
 export default function InputField({
@@ -18,17 +18,13 @@ export default function InputField({
   Wrapper,
   ...props
 }: InputFieldProps) {
-
   const Content = (
     <label htmlFor={label}>
       {label}
-      <input
-        {...props}
-        className='input w-full mt-1'
-      />
+      <input {...props} className='input w-full mt-1' />
 
       <p className='text-sm text-red-400 mt-1'>{error}</p>
     </label>
-  )
+  );
   return Wrapper ? <Wrapper>{Content}</Wrapper> : Content;
 }
