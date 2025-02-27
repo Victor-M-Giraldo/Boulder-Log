@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler';
 import PrismaClient from '../database/PrismaClient.js';
 import { ApiException } from '../errors/ApiErrors.js';
 import { isPrismaError } from '../utils/prismaUtils.js';
+import multer from "../config/misc/multer.js";
 
 const getClimbsForUser = asyncHandler(async (req, res) => {
   const climbs = await PrismaClient.climb.findMany({
