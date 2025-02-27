@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Modal from '../components/Modal';
+import NewClimbForm from '../components/NewClimbForm';
 
 const mockClimbs = [
   {
@@ -32,6 +34,13 @@ const mockClimbs = [
 const ViewClimbsPage: React.FC = () => {
   const [filter, setFilter] = useState<string>('all');
   const [sort, setSort] = useState<string>('date');
+  const [modalVisible, setModalVisible] = useState(false);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log('Form submitted');
+    setModalVisible(false);
+  }
 
   // Filter and sort climbs
   const filteredClimbs = mockClimbs
@@ -47,6 +56,9 @@ const ViewClimbsPage: React.FC = () => {
 
   return (
     <section className='p-6 bg-base-200 h-full max-w-7xl mx-auto'>
+      <Modal open={modalVisible} onCancel={() => setModalVisible(false)}>
+        <NewClimbForm onSubmit={handleSubmit}/>
+      </Modal>
       <div className='mb-8'>
         <h1 className='text-3xl font-bold'>Your Climbs</h1>
         <p>You’ve logged {mockClimbs.length} climbs – keep crushing it!</p>
@@ -119,7 +131,11 @@ const ViewClimbsPage: React.FC = () => {
       </div>
 
       <div className='mt-8'>
-        <button className='btn btn-primary'>Log a New Climb</button>
+        <button
+          className='btn btn-primary'
+          onClick={() => setModalVisible(true)}>
+          Log a New Climb
+        </button>
       </div>
     </section>
   );

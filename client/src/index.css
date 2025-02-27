@@ -1,5 +1,44 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "daisyui" {
-    exclude: rootcolor;
+  exclude: rootcolor;
 }
 @plugin "@tailwindcss/typography";
+
+@layer base {
+  dialog {
+    margin: auto;
+    padding: 2rem;
+    border: none;
+    border-radius: 6px;
+    opacity: 0;
+    /* When we close and open our modal it transitions from display none to being displayed and vice versa */
+    /* Because of this, it doesn't give any time for our transition to take place. allow-discrete fixes this. */
+    transition: opacity 0.3s allow-discrete;
+  }
+
+  dialog[open] {
+    opacity: 1;
+  }
+
+  /* Gives a starting style to the dialog for our transition to use. */
+  @starting-style {
+    dialog[open] {
+      opacity: 0;
+    }
+  }
+
+  dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0);
+    transition: all 0.3s allow-discrete;
+  }
+
+  dialog[open]::backdrop {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  @starting-style {
+    dialog[open]::backdrop {
+      background-color: rgba(0, 0, 0, 0);
+    }
+  }
+}
