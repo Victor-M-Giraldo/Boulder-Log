@@ -2,7 +2,7 @@ import asyncHandler from 'express-async-handler';
 import PrismaClient from '../database/PrismaClient.js';
 import { ApiException } from '../errors/ApiErrors.js';
 import { isPrismaError } from '../utils/prismaUtils.js';
-import multer from "../config/misc/multer.js";
+import { uploadFile } from '../utils/cloudinary.js';
 
 const getClimbsForUser = asyncHandler(async (req, res) => {
   const climbs = await PrismaClient.climb.findMany({
@@ -20,12 +20,15 @@ const getClimbsForUser = asyncHandler(async (req, res) => {
 
 const createClimb = asyncHandler(async (req, res) => {
   const { grade, location, completed } = req.body;
+  const { file } = req;
+  const imageInfo = await uploadFile(file.buffer);
 
   const climb = await PrismaClient.climb.create({
     data: {
       grade: grade,
       location: location,
       completed: completed,
+      imageUrl: imageInfo.secure_url,
       user: {
         connect: {
           id: req.user.id,

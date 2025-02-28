@@ -8,6 +8,7 @@ import {
 } from '../validations/climb-validations.js';
 import { withValidation } from '../validations/validation-utils.js';
 import NoteRouter from './note-router.js';
+import multer from "../config/misc/multer.js";
 
 const ClimbRouter = Router();
 
@@ -29,6 +30,7 @@ ClimbRouter.get(
 
 ClimbRouter.post(
   '/',
+  multer.single('image'),
   withValidation(createClimbValidations),
   ClimbController.createClimb
 );
