@@ -31,7 +31,8 @@ export default function NewClimbForm({ onSubmit }: NewClimbFormProps) {
         onSubmit={onSubmit}
         FormHeader={() => (
           <h1 className='text-2xl font-bold'>Log a new climb.</h1>
-        )}>
+        )}
+        enctype='multipart/form-data'>
         <InputField
           type='text'
           name='location'
@@ -45,14 +46,16 @@ export default function NewClimbForm({ onSubmit }: NewClimbFormProps) {
           options={SelectOptions}
           label='Difficulty'
           Wrapper='div'
-          required={true}></SelectInput>
-        <FileInput label='Picture of Climb' Wrapper='div' accept='image/*' required={true}/>
+          required={true}
+          name='grade'></SelectInput>
+        <FileInput label='Picture of Climb' Wrapper='div' accept='image/*' required={true} name='image'/>
 
         <CheckboxInput
           label='Completed?'
           Wrapper='div'
           value='completed'
-          required={true}>
+          required={true}
+          name='completed'>
           Completed?
         </CheckboxInput>
         <Button type='submit' width='auto'>

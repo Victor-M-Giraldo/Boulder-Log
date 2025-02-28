@@ -6,6 +6,7 @@ interface SelectInputProps {
   Wrapper?: ElementType;
   required?: boolean;
   error?: string | null;
+  name: string;
 }
 
 export default function SelectInput({
@@ -14,6 +15,7 @@ export default function SelectInput({
   Wrapper,
   required,
   error,
+  name,
 }: SelectInputProps) {
   const Content = (
     <label htmlFor={label}>
@@ -21,7 +23,8 @@ export default function SelectInput({
       <select
         className='select w-full mt-1'
         defaultValue={options[0]}
-        required={required}>
+        required={required}
+        name={name}>
         {options.map((option, index) => (
           <option key={index} value={option}>
             {option}

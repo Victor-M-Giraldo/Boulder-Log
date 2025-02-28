@@ -6,9 +6,10 @@ interface FileInputProps {
     accept: string;
     required?: boolean;
     error?: string | null;
+    name: string;
 }
 
-export default function FileInput({label, Wrapper, accept, required, error}: FileInputProps) {
+export default function FileInput({label, Wrapper, accept, required, error, name}: FileInputProps) {
   const Content = (
     <label htmlFor={label}>
       {label}
@@ -17,6 +18,7 @@ export default function FileInput({label, Wrapper, accept, required, error}: Fil
         className='file-input w-full mt-1'
         accept={accept}
         required={required}
+        name={name}
       />
       <p className='text-sm text-red-400 mt-1'>{error}</p>
     </label>
