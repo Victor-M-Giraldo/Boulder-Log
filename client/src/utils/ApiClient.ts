@@ -4,15 +4,14 @@ interface ApiClientOptions extends RequestInit {
   headers?: HeadersInit;
 }
 
-export async function ApiClient(endpoint: string, options: ApiClientOptions, body: Record<string, string>) {
+export async function ApiClient(endpoint: string, options: ApiClientOptions, body: Record<string, string> | FormData) {
   const config: RequestInit = {
     method: 'GET',
     ...options,
     headers: {
-      'Content-Type': 'application/json',
       ...options.headers,
     },
-    body: body ? JSON.stringify(body) : undefined,
+    body: body instanceof FormData ? body : JSON.stringify(body),
   };
 
   return fetch(`${API_BASE_URL}/${endpoint}`, config);
