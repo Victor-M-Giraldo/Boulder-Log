@@ -22,9 +22,9 @@ const validateLocation = () =>
 const validateCompleted = () =>
   body('completed')
     .trim()
+    .toBoolean()
     .isBoolean()
-    .withMessage('Completed must be a boolean')
-    .toBoolean();
+    .withMessage('Completed must be a boolean');
 
 const updateClimbValidations = [
   validateGrade().optional(),

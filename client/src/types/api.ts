@@ -6,9 +6,13 @@ export interface LoginResponse {
     user: User;
 }
 
-
 export interface RegisterResponse {
     token: string;
     expiresIn: string;
     user: User;
+}
+
+export interface Token {
+    token: string;
+    expiresIn: string;
 }
