@@ -1,0 +1,64 @@
+{
+  "name": "climb-tracker-api",
+  "version": "1.0.0",
+  "description": "A RESTful API for tracking climbing routes, logging climbs, and managing user progress.",
+  "keywords": [
+    "climbing",
+    "climbing-routes",
+    "route-tracker",
+    "climb-logger",
+    "rock-climbing",
+    "express",
+    "nodejs",
+    "prisma",
+    "rest-api",
+    "jwt"
+  ],
+  "homepage": "https://github.com/Victor-M-Giraldo/climb-tracker-api#readme",
+  "bugs": {
+    "url": "https://github.com/Victor-M-Giraldo/climb-tracker-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Victor-M-Giraldo/climb-tracker-api.git"
+  },
+  "license": "ISC",
+  "author": "Victor Giraldo",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "vitest",
+    "format": "npx prettier --write .",
+    "dev": "node --watch app.js"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.4.1",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.5.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-async-handler": "^1.2.0",
+    "express-validator": "^7.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "@faker-js/faker": "^9.4.0",
+    "eslint": "^9.19.0",
+    "eslint-config-prettier": "^10.0.1",
+    "globals": "^15.14.0",
+    "prettier": "3.4.2",
+    "prisma": "^6.4.1",
+    "supertest": "^7.0.0",
+    "vitest": "^3.0.4"
+  }
+}

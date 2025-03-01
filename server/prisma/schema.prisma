@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  firstName String
+  lastName  String
+  climbs    Climb[]
+
+  @@map("users")
+}
+
+model Climb {
+  id        Int      @id @default(autoincrement())
+  grade     String
+  location  String?
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  notes     Note[]
+  imageUrl  String @default("https://i.imgur.com/Oxq1WVL.jpeg")
+
+  @@map("climbs")
+}
+
+model Note {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  climbId   Int
+  climb     Climb    @relation(fields: [climbId], references: [id], onDelete: Cascade)
+
+  @@map("notes")
+}
