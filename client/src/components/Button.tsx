@@ -6,6 +6,7 @@ interface ButtonProps {
   disabled?: boolean;
   Wrapper?: ElementType;
   width: 'full' | 'auto';
+  onClick?: () => void;
 }
 
 export default function Button({ children, Wrapper, width, ...props }: ButtonProps) {
