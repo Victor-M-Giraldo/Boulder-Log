@@ -10,13 +10,13 @@ const features = [
   {
     title: "Log Your Climbs",
     description: "Record your climbs with details like difficulty, gym, and date.",
-    link: "/",
+    link: "/climbs",
     linkText: "Start Logging",
   },
   {
     title: "Add Notes",
     description: "Jot down tips, beta, or reflections for each climb to improve your skills.",
-    link: "/",
+    link: "/climbs",
     linkText: "Add Your First Note",
   }
 ]

@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Modal from '../components/Modal';
 import NewClimbForm from '../components/NewClimbForm';
-import { getItem } from '../utils/localStorage';
 import InfoCard from '../components/InfoCard';
 import ClimbFilters from '../components/ClimbFilters';
 import Button from '../components/Button';
 import Climbs from '../components/Climbs';
 import { Climb } from '../types/climb';
-import { Token } from '../types/api';
+import { CreateClimb } from '../services/ClimbService';
+import { useNavigate } from 'react-router';
+import useUser from '../hooks/useUser';
 
 const mockClimbs: Climb[] = [
   {
@@ -40,25 +41,23 @@ const mockClimbs: Climb[] = [
 
 const ViewClimbsPage: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const navigate = useNavigate();
+  const { user } = useUser();
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    console.log('Form submitted');
-    const formData = new FormData(e.currentTarget);
-    const tokenData = getItem<Token>('token');
-    if (!tokenData || !tokenData.token) {
-      return;
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
     }
-    const token = tokenData.token;
-    await fetch('http://localhost:3000/climbs', {
-      headers: {
-        Authorization: token,
-      },
-      method: 'POST',
-      body: formData,
-    });
-    setModalVisible(false);
-  }
+  }, [user, navigate]);
+
+async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault();
+  const form = e.currentTarget;
+  const formData = new FormData(form);
+  await CreateClimb(formData);
+  form.reset();
+  setModalVisible(false);
+}
 
   return (
     <section className='p-6 bg-base-200 h-full max-w-7xl mx-auto'>

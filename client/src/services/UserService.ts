@@ -1,5 +1,5 @@
 import { ApiClient } from '../utils/ApiClient';
-import { LoginResponse} from "../types/api.ts";
+import { LoginResponse, RegisterResponse} from "../types/api.ts";
 import { handleErrors } from '../utils/errorHandler.ts';
 
 export async function authenticate(email: string, password: string): Promise<LoginResponse> {
@@ -16,7 +16,7 @@ export async function authenticate(email: string, password: string): Promise<Log
   return await response.json();
 }
 
-export async function register(firstName: string, lastName: string, email: string, password: string, confirmPassword: string): Promise<LoginResponse> {
+export async function register(firstName: string, lastName: string, email: string, password: string, confirmPassword: string): Promise<RegisterResponse> {
   const response = await ApiClient(
     '/register',
     { method: 'POST' },
