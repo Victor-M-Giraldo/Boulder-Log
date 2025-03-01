@@ -8,14 +8,14 @@ import { useLogin } from '../hooks/useLogin';
 import { useNavigate } from 'react-router';
 
 export default function LogInForm() {
-  const { login, errors, loading } = useLogin();
+  const { handleLogin, errors, loading } = useLogin();
   const navigate = useNavigate();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = serializeFormData(formData);
-    const loginSuccess = await login(data);
+    const loginSuccess = await handleLogin(data);
     if (loginSuccess) {
       navigate('/');
     }
