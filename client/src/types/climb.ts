@@ -4,8 +4,8 @@ export interface Climb {
     id: number;
     grade: GradeOptions;
     location: string;
-    date: string;
+    createdAt: string;
     completed: boolean;
     notes: string[];
-    image: string;
+    imageUrl: string;
 }
