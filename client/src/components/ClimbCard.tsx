@@ -1,16 +1,18 @@
 import CompletedStatus from "./CompletedStatus";
 import ClimbNotes from "./ClimbNotes";
 import { Climb } from "../types/climb";
+import { format } from 'date-fns';
 
 interface ClimbCardProps {
     climb: Climb;
 }
 
 export default function ClimbCard({ climb }: ClimbCardProps) {
+  climb.createdAt = format(new Date(climb.createdAt), 'MMMM dd, yyyy');
     return (
       <div className='bg-base-100 p-4 rounded-lg shadow flex flex-col sm:flex-row items-start gap-4'>
         <img
-          src={climb.image}
+          src={climb.imageUrl}
           alt={climb.grade}
           className='w-full sm:w-24 sm:h-24 object-cover rounded-lg flex-shrink-0'
         />
@@ -19,7 +21,7 @@ export default function ClimbCard({ climb }: ClimbCardProps) {
             <div className='min-w-0'>
               <p className='text-xl font-bold'>{climb.grade}</p>
               <p>{climb.location}</p>
-              <p className='text-sm'>{climb.date}</p>
+              <p className='text-sm'>{climb.createdAt}</p>
             </div>
             <CompletedStatus completed={climb.completed} />
           </div>
