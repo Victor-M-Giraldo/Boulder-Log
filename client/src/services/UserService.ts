@@ -5,7 +5,11 @@ import { handleErrors } from '../utils/errorHandler.ts';
 export async function authenticate(email: string, password: string): Promise<LoginResponse> {
   const response = await ApiClient(
     'login',
-    { method: 'POST' },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST' },
     { email, password }
   );
 
@@ -19,9 +23,14 @@ export async function authenticate(email: string, password: string): Promise<Log
 export async function register(firstName: string, lastName: string, email: string, password: string, confirmPassword: string): Promise<RegisterResponse> {
   const response = await ApiClient(
     '/register',
-    { method: 'POST' },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+    },
     { firstName, lastName, email, password, confirmPassword }
-  )
+  );
 
   if (!response.ok) {
     throw await handleErrors(response);
