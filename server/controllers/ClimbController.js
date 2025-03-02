@@ -3,6 +3,7 @@ import PrismaClient from '../database/PrismaClient.js';
 import { ApiException } from '../errors/ApiErrors.js';
 import { isPrismaError } from '../utils/prismaUtils.js';
 import { uploadFile } from '../utils/cloudinary.js';
+import { v2 as cloudinary } from 'cloudinary';
 
 const getClimbsForUser = asyncHandler(async (req, res) => {
   const climbs = await PrismaClient.climb.findMany({
@@ -12,9 +13,7 @@ const getClimbsForUser = asyncHandler(async (req, res) => {
   });
 
   res.status(200).json({
-    data: {
-      climbs,
-    },
+    climbs,
   });
 });
 
@@ -23,12 +22,19 @@ const createClimb = asyncHandler(async (req, res) => {
   const { file } = req;
   const imageInfo = await uploadFile(file.buffer);
 
+  const transformedImageUrl = cloudinary.url(imageInfo.public_id, {
+    width: 1000,
+    height: 667,
+    crop: 'fill',
+    quality: 'auto',
+  });
+
   const climb = await PrismaClient.climb.create({
     data: {
       grade: grade,
       location: location,
       completed: completed,
-      imageUrl: imageInfo.secure_url,
+      imageUrl: transformedImageUrl,
       user: {
         connect: {
           id: req.user.id,
