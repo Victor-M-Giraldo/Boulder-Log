@@ -4,7 +4,7 @@ import UserRouter from './routes/user-router.js';
 import ClimbRouter from './routes/climb-router.js';
 import morgan from './config/loggers/morgan.js';
 import logger from './config/loggers/winston.js';
-import ErrorHandler from './middleware/errorhandler.js';
+import ErrorHandler from './middleware/ErrorHandler.js';
 import passport from './config/auth/passport.js';
 import cors from "cors";
 
