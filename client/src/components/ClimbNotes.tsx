@@ -5,6 +5,9 @@ interface ClimbNotesProps {
 }
 
 export default function ClimbNotes({ notes }: ClimbNotesProps) {
+  if (!notes) {
+    return null;
+  }
   return (
     <div className='mt-2 space-y-2'>
       <ul
