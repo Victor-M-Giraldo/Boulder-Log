@@ -1,6 +1,6 @@
 interface InfoCardProps {
     title: string;
-    value: string;
+    value: string | number;
 }
 
 export default function InfoCard({title, value}: InfoCardProps) {
