@@ -1,6 +1,7 @@
 interface TextAreaProps {
     label: string;
     placeholder: string;
+    name: string;
     error?: string;
     required?: boolean;
     maxLength?: number;
@@ -14,6 +15,7 @@ export default function TextArea({
     placeholder,
     maxLength,
     minLength,
+    name,
 }: TextAreaProps) {
     return (
         <>
@@ -25,6 +27,7 @@ export default function TextArea({
                     required={required}
                     maxLength={maxLength}
                     minLength={minLength}
+                    name={name}
                 ></textarea>
                 <p className='text-sm text-red-400 mt-1'>{error}</p>
             </label>
