@@ -10,7 +10,7 @@ import { CreateClimb, GetClimbs } from '../services/ClimbService';
 import { useNavigate } from 'react-router';
 import useUser from '../hooks/useUser';
 
-const ViewClimbsPage: React.FC = () => {
+export default function ViewClimbsPage() {
   const [climbs, setClimbs] = useState<Climb[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const navigate = useNavigate();
@@ -31,44 +31,49 @@ const ViewClimbsPage: React.FC = () => {
     fetchClimbs();
   }, []);
 
-async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-  e.preventDefault();
-  const form = e.currentTarget;
-  const formData = new FormData(form);
-  await CreateClimb(formData);
-  form.reset();
-  setModalVisible(false);
-  fetchClimbs();
-}
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    await CreateClimb(formData);
+    form.reset();
+    setModalVisible(false);
+    fetchClimbs();
+  }
 
   return (
-    <section className='p-6 bg-base-200 h-full max-w-7xl mx-auto'>
-      <Modal open={modalVisible} onCancel={() => setModalVisible(false)}>
-        <NewClimbForm onSubmit={handleSubmit} />
-      </Modal>
-      <div className='mb-8'>
-        <h1 className='text-3xl font-bold'>Your Climbs</h1>
-        <p>You’ve logged {climbs.length} climbs – keep crushing it!</p>
-      </div>
+    <>
+      {user && (
+        <section className='p-6 bg-base-200 h-full max-w-7xl mx-auto'>
+          <Modal open={modalVisible} onCancel={() => setModalVisible(false)}>
+            <NewClimbForm onSubmit={handleSubmit} />
+          </Modal>
+          <div className='mb-8'>
+            <h1 className='text-3xl font-bold'>Your Climbs</h1>
+            <p>You’ve logged {climbs.length} climbs – keep crushing it!</p>
+          </div>
 
-      <div className='grid grid-cols-2 md:grid-cols-4 gap-4 mb-8'>
-        <InfoCard title='Total Climbs' value={climbs.length} />
-        <InfoCard title='Highest Grade' value='V6' />
-        <InfoCard title='Most Frequent Location' value='Local Gym' />
-        <InfoCard title='Last Climb' value='3 days ago' />
-      </div>
+          <div className='grid grid-cols-2 md:grid-cols-4 gap-4 mb-8'>
+            <InfoCard title='Total Climbs' value={climbs.length} />
+            <InfoCard title='Highest Grade' value='V6' />
+            <InfoCard title='Most Frequent Location' value='Local Gym' />
+            <InfoCard title='Last Climb' value='3 days ago' />
+          </div>
 
-      <ClimbFilters />
+          <ClimbFilters />
 
-      <Climbs climbs={climbs} />
+          <Climbs climbs={climbs} />
 
-      <div className='mt-8'>
-        <Button type='button' width='auto' onClick={() => setModalVisible(true)}>
-          Log a New Climb
-        </Button>
-      </div>
-    </section>
+          <div className='mt-8'>
+            <Button
+              type='button'
+              width='auto'
+              onClick={() => setModalVisible(true)}>
+              Log a New Climb
+            </Button>
+          </div>
+        </section>
+      )}
+    </>
   );
-};
-
-export default ViewClimbsPage;
+}
