@@ -1,9 +1,11 @@
+import { Note as NoteType } from "../types/note";
+
 interface NoteProps {
-    note: string;
+    note: NoteType;
 }
 
 export default function Note({note}: NoteProps) {
     return (
-        <li>{note}</li>
+        <li>{note.content}</li>
     )
 }
