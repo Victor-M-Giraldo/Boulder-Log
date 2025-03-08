@@ -1,7 +1,8 @@
 import Note from "./Note";
+import { Note as NoteType } from "../types/note";
 
 interface ClimbNotesProps {
-    notes: string[];
+    notes: NoteType[];
 }
 
 export default function ClimbNotes({ notes }: ClimbNotesProps) {
