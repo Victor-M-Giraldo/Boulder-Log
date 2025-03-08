@@ -10,6 +10,9 @@ const getClimbsForUser = asyncHandler(async (req, res) => {
     where: {
       userId: req.user.id,
     },
+    include: {
+      notes: true,  
+    }
   });
 
   res.status(200).json({
