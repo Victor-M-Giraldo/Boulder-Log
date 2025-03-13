@@ -11,11 +11,12 @@ const getClimbsForUser = asyncHandler(async (req, res) => {
       userId: req.user.id,
     },
     include: {
-      notes: true,  
-    }
+      notes: true,
+    },
   });
 
   res.status(200).json({
+    success: true,
     climbs,
   });
 });
@@ -47,6 +48,7 @@ const createClimb = asyncHandler(async (req, res) => {
   });
 
   res.status(201).json({
+    success: true,
     data: {
       climb,
     },
@@ -68,7 +70,10 @@ const getClimb = asyncHandler(async (req, res) => {
     throw new ApiException('Climb not found', 404);
   }
 
-  return res.status(200).json({ data: { climb } });
+  return res.status(200).json({
+    success: true,
+    data: { climb },
+  });
 });
 
 const deleteClimb = asyncHandler(async (req, res) => {
@@ -81,7 +86,9 @@ const deleteClimb = asyncHandler(async (req, res) => {
         userId: req.user.id,
       },
     });
-    return res.status(204).end();
+    return res.status(204).json({
+      success: true,
+    });
   } catch (e) {
     if (isPrismaError(e, 'P2025')) {
       res.status(404);
@@ -130,7 +137,6 @@ const updateClimb = asyncHandler(async (req, res) => {
     }
   }
 
-  res.set('Content-Location', `/climbs/${climbId}`);
   return res.status(204).end();
 });
 
