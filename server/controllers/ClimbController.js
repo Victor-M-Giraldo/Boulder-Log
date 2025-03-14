@@ -11,8 +11,8 @@ const getClimbsForUser = asyncHandler(async (req, res) => {
       userId: req.user.id,
     },
     include: {
-      notes: true,  
-    }
+      notes: true,
+    },
   });
 
   res.status(200).json({
@@ -47,9 +47,7 @@ const createClimb = asyncHandler(async (req, res) => {
   });
 
   res.status(201).json({
-    data: {
-      climb,
-    },
+    climb,
   });
 });
 
@@ -68,7 +66,7 @@ const getClimb = asyncHandler(async (req, res) => {
     throw new ApiException('Climb not found', 404);
   }
 
-  return res.status(200).json({ data: { climb } });
+  return res.status(200).json({ climb });
 });
 
 const deleteClimb = asyncHandler(async (req, res) => {
@@ -130,7 +128,6 @@ const updateClimb = asyncHandler(async (req, res) => {
     }
   }
 
-  res.set('Content-Location', `/climbs/${climbId}`);
   return res.status(204).end();
 });
 

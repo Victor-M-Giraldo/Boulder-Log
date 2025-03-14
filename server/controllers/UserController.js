@@ -38,14 +38,11 @@ const registerUser = asyncHandler(async (req, res) => {
   };
   const { token, expiresIn } = issueJWT(newUser);
 
-  res
-    .status(201)
-    .header('Location', `/users/${newUser.id}`)
-    .json({
-      token: `bearer ${token}`,
-      expiresIn: expiresIn,
-      user: userResponse,
-    });
+  res.status(201).json({
+    token: `bearer ${token}`,
+    expiresIn: expiresIn,
+    user: userResponse,
+  });
 });
 
 const loginUser = asyncHandler(async (req, res) => {

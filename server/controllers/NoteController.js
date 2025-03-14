@@ -22,9 +22,7 @@ const getNote = expressAsyncHandler(async (req, res) => {
   }
 
   return res.status(200).json({
-    data: {
-      note,
-    },
+    note,
   });
 });
 
@@ -47,8 +45,7 @@ const createNote = expressAsyncHandler(async (req, res) => {
     });
 
     return res.status(201).json({
-      message: 'Note created successfully',
-      data: { note },
+      note,
     });
   } catch (e) {
     if (isPrismaError(e, 'P2025')) {

@@ -13,5 +13,8 @@ function filefilter(req, file, cb) {
   }
 }
 
-const storage = multer({ storage: multer.memoryStorage(), fileFilter: filefilter });
+const storage = multer({
+  storage: multer.memoryStorage(),
+  fileFilter: filefilter,
+});
 export default storage;
