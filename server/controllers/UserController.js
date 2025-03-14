@@ -42,7 +42,6 @@ const registerUser = asyncHandler(async (req, res) => {
     .status(201)
     .header('Location', `/users/${newUser.id}`)
     .json({
-      success: true,
       token: `bearer ${token}`,
       expiresIn: expiresIn,
       user: userResponse,
@@ -78,7 +77,6 @@ const loginUser = asyncHandler(async (req, res) => {
     lastName: user.lastName,
   };
   res.json({
-    success: true,
     token: `Bearer ${token}`,
     expiresIn,
     user: existingUser,

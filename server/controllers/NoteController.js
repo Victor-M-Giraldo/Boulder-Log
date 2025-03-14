@@ -22,7 +22,6 @@ const getNote = expressAsyncHandler(async (req, res) => {
   }
 
   return res.status(200).json({
-    success: true,
     data: {
       note,
     },
@@ -48,7 +47,7 @@ const createNote = expressAsyncHandler(async (req, res) => {
     });
 
     return res.status(201).json({
-      success: true,
+      message: 'Note created successfully',
       data: { note },
     });
   } catch (e) {
