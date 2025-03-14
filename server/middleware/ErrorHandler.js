@@ -7,7 +7,6 @@ export default function ErrorHandler(err, req, res, _next) {
 
   if (err instanceof ApiException) {
     return res.status(err.status).json({
-      success: false,
       type: err.name,
       message: err.message,
     });
@@ -15,7 +14,6 @@ export default function ErrorHandler(err, req, res, _next) {
 
   if (err instanceof ValidationError) {
     return res.status(err.status).json({
-      success: false,
       type: err.name,
       message: err.message,
       errors: err.errors,
@@ -23,7 +21,6 @@ export default function ErrorHandler(err, req, res, _next) {
   }
 
   return res.status(500).json({
-    success: false,
     type: 'InternalServerError',
     message: 'Something unexpected went wrong!',
   });
