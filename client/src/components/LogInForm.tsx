@@ -5,20 +5,15 @@ import GeneralError from './GeneralError';
 import AuthFooter from './AuthFooter';
 import { serializeFormData } from '../utils/formUtils';
 import { useLogin } from '../hooks/useLogin';
-import { useNavigate } from 'react-router';
 
 export default function LogInForm() {
   const { handleLogin, errors, loading } = useLogin();
-  const navigate = useNavigate();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = serializeFormData(formData);
-    const loginSuccess = await handleLogin(data);
-    if (loginSuccess) {
-      navigate('/');
-    }
+    await handleLogin(data);
   }
 
   return (
