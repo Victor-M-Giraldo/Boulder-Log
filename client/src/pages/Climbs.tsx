@@ -62,7 +62,7 @@ export default function ViewClimbsPage() {
 
           <ClimbFilters />
 
-          <Climbs climbs={climbs} />
+          <Climbs climbs={climbs} setClimbs={setClimbs} />
 
           <div className='mt-8'>
             <Button

@@ -46,10 +46,7 @@ const createNote = expressAsyncHandler(async (req, res) => {
       },
     });
 
-    return res.status(201).json({
-      message: 'Note created successfully',
-      data: { note },
-    });
+    return res.status(201).json(note);
   } catch (e) {
     if (isPrismaError(e, 'P2025')) {
       throw new ApiException('Climb not found or unauthorized', 404);
