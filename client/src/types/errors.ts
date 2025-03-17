@@ -1,8 +1,13 @@
-export interface ValidationError {
-    path: string;
+export interface ValidationErrorField {
+    type: string;
     msg: string;
+    path: string;
+    location: string;
+    value?: string;
 }
 
 export interface ValidationErrorResponse {
-    errors: ValidationError[];
+    type: string;
+    message: string;
+    errors: ValidationErrorField[];
 }
