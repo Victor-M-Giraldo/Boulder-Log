@@ -1,6 +1,6 @@
 import { getItem } from '../utils/localStorage';
 import { Token } from '../types/api';
-import { ApiClient } from '../utils/ApiClient';
+import  ApiClient  from '../utils/ApiClient';
 
 export async function CreateNote(content: string, climbID: number) {
   const tokenData = getItem<Token>('token');
@@ -8,17 +8,16 @@ export async function CreateNote(content: string, climbID: number) {
     return;
   }
   const { token } = tokenData;
-  const response = await ApiClient(
+  const data = await ApiClient.post(
     `climbs/${climbID}/notes`,
+    { content: content },
     {
       headers: {
         Authorization: token,
         'Content-Type': 'application/json',
       },
-      method: 'POST',
     },
-    { content: content }
   );
-  const data = await response.json();
+
   return data;
 }

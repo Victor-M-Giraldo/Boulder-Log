@@ -1,6 +1,6 @@
 import { getItem } from '../utils/localStorage';
 import { Token } from '../types/api';
-import { ApiClient } from '../utils/ApiClient';
+import  ApiClient  from '../utils/ApiClient';
 
 export async function CreateClimb(formData: FormData) {
   const tokenData = getItem<Token>('token');
@@ -8,15 +8,14 @@ export async function CreateClimb(formData: FormData) {
     return;
   }
   const { token } = tokenData;
-  return ApiClient(
+  return ApiClient.post(
     'climbs',
+    formData,
     {
       headers: {
         Authorization: token,
       },
-      method: 'POST',
     },
-    formData
   );
 }
 export async function GetClimbs() {
@@ -25,10 +24,10 @@ export async function GetClimbs() {
     return;
   }
   const { token } = tokenData;
-  const res = await ApiClient('climbs', {
+  const data = await ApiClient.get('climbs', {
     headers: {
       Authorization: token,
     },
   });
-  return await res.json();
+  return data;
 }
