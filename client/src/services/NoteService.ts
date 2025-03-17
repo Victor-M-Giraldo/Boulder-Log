@@ -8,7 +8,7 @@ export async function CreateNote(content: string, climbID: number) {
     return;
   }
   const { token } = tokenData;
-  return ApiClient(
+  const response = await ApiClient(
     `climbs/${climbID}/notes`,
     {
       headers: {
@@ -19,4 +19,6 @@ export async function CreateNote(content: string, climbID: number) {
     },
     { content: content }
   );
+  const data = await response.json();
+  return data;
 }

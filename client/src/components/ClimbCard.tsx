@@ -11,7 +11,6 @@ interface ClimbCardProps {
 
 export default function ClimbCard({ climb, onAddNote }: ClimbCardProps) {
   climb.createdAt = format(new Date(climb.createdAt), 'MMMM dd, yyyy');
-  console.log(climb);
   return (
     <div className='bg-base-100 p-4 rounded-lg shadow flex flex-col sm:flex-row items-start gap-4'>
       <img

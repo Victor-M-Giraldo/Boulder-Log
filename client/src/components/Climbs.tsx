@@ -7,8 +7,9 @@ import { CreateNote } from '../services/NoteService';
 
 interface ClimbsProps {
   climbs: Climb[];
+  setClimbs: React.Dispatch<React.SetStateAction<Climb[]>>;
 }
-export default function Climbs({ climbs }: ClimbsProps) {
+export default function Climbs({ climbs, setClimbs }: ClimbsProps) {
   const [selectedClimbID, setSelectedClimbID] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -17,7 +18,18 @@ export default function Climbs({ climbs }: ClimbsProps) {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const noteContent = formData.get('note') as string;
-    await CreateNote(noteContent, selectedClimbID);
+    const note = await CreateNote(noteContent, selectedClimbID);
+    setClimbs((prevClimbs) => {
+      return prevClimbs.map((climb) => {
+        if (climb.id === note.climbId) {
+          return {
+            ...climb,
+            notes: [...climb.notes, note],
+          };
+        }
+        return climb;
+      });
+    });
     form.reset();
     setModalVisible(false);
   }
